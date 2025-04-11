@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Available Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #e0e0e0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px rgba(0, 255, 255, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 30px;
+      color: #00fff7;
+      letter-spacing: 1px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      margin-bottom: 15px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease;
+    }
+
+    li:hover {
+      background-color: rgba(0, 255, 255, 0.1);
+      transform: scale(1.01);
+    }
+
+    .book-info {
+      flex-grow: 1;
+      font-size: 15px;
+    }
+
+    .book-info strong {
+      font-size: 17px;
+      color: #ffffff;
+    }
+
+    a.button {
+      background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      transition: 0.3s ease;
+    }
+
+    a.button:hover {
+      background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #00e6ff;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 10px;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      text-shadow: 0 0 8px #00fff7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📚 Available Books</h2>
+    <ul>
+      {% for book in books %}
+        <li>
+          <div class="book-info">
+            <strong>{{ book.title }}</strong> by {{ book.author }} – ₹{{ book.price }}
+          </div>
+          <a href="{% url 'add_to_cart' book.id %}" class="button">Add to Cart</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="nav-links">
+      <a href="{% url 'view_cart' %}">🛒 View Cart</a>
+      <a href="{% url 'logout' %}">🚪 Logout</a>
+    </div>
+  </div>
+</body>
+</html>
